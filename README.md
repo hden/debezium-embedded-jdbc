@@ -1,4 +1,4 @@
-# debezium-embedded-jdbc
+# debezium-embedded-jdbc [![CircleCI](https://circleci.com/gh/hden/debezium-embedded-jdbc/tree/master.svg?style=svg)](https://circleci.com/gh/hden/debezium-embedded-jdbc/tree/master) [![codecov](https://codecov.io/gh/hden/debezium-embedded-jdbc/branch/master/graph/badge.svg)](https://codecov.io/gh/hden/debezium-embedded-jdbc)
 
 Debezium DatabaseHistory and OffsetBackingStore implementations backed by JDBC.
 
