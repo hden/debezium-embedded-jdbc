@@ -2,7 +2,7 @@
   (:require [clojure.test :refer :all]
             [clojure.java.jdbc :as jdbc]
             [hikari-cp.core :as hikari]
-            [io.debezium.contrib.jdbc.schema :refer :all])
+            [io.debezium.contrib.jdbc.history :refer :all])
   (:import [java.util.function Consumer]
            [io.debezium.config Configuration]
            [io.debezium.contrib.jdbc JDBCDatabaseHistory]))
