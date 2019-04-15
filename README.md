@@ -10,16 +10,18 @@ Debezium DatabaseHistory and OffsetBackingStore implementations backed by JDBC.
 
 ```connector.properties
 offset.storage=io.debezium.contrib.jdbc.JDBCOffsetBackingStore
-offset.storage.postgres.table=offsets
-offset.storage.postgres.instance.id=debezium
+offset.storage.jdbc.url=jdbc:sqlite:
+offset.storage.jdbc.table=offsets
+offset.storage.jdbc.instance.id=debezium
 ```
 
 ### JDBCDatabaseHistory
 
 ```connector.properties
 database.history=io.debezium.contrib.jdbc.JDBCDatabaseHistory
-database.history.postgres.table=schema
-database.history.postgres.instance.id=debezium
+database.history.jdbc.url=jdbc:sqlite:
+database.history.jdbc.table=schema
+database.history.jdbc.instance.id=debezium
 ```
 
 ## License

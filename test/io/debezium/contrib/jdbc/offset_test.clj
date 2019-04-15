@@ -13,11 +13,12 @@
     (let [fixture "foobar"]
       (is (= fixture (string-from-byte-buffer (string-to-byte-buffer fixture)))))))
 
+(def database-url "jdbc:sqlite:")
 (def table-name "offsets")
 (def instance-id "test")
 
 (defn- create-pool []
-  (let [pool (hikari/make-datasource {:maximum-pool-size 1 :jdbc-url "jdbc:sqlite:"})]
+  (let [pool (hikari/make-datasource {:maximum-pool-size 1 :jdbc-url database-url})]
     (jdbc/with-db-connection [conn {:datasource pool}]
       (jdbc/execute! conn "create table offsets (id text primary key, content text)")
       (jdbc/insert! conn table-name {:id "foobar" :content "{\"x\":\"y\"}"}))
@@ -39,8 +40,9 @@
 (defn create-config []
   (proxy [WorkerConfig] [(ConfigDef.) {}]
     (originals []
-      {"offset.storage.postgres.table" (name table-name)
-       "offset.storage.postgres.instance.id" instance-id})))
+      {"offset.storage.jdbc.url" database-url
+       "offset.storage.jdbc.table" (name table-name)
+       "offset.storage.jdbc.instance.id" instance-id})))
 
 (defn- create-instance []
   (let [instance (JDBCOffsetBackingStore.)
@@ -56,7 +58,8 @@
   (testing "configure"
     (let [instance (JDBCOffsetBackingStore.)]
       (.configure instance (create-config))
-      (is (= {:table-name table-name :instance-id instance-id} @(.state instance)))))
+      (is (= {:database-url database-url :table-name table-name :instance-id instance-id}
+             @(.state instance)))))
 
   (testing "start"
     (let [instance (create-instance)]

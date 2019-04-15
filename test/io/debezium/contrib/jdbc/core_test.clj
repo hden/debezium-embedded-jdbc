@@ -4,7 +4,7 @@
             [io.debezium.contrib.jdbc.core :refer :all]))
 
 (defn- create-pool []
-  (let [pool (create-connection-pool {})]
+  (let [pool (create-connection-pool {:jdbc-url "jdbc:sqlite:"})]
     (jdbc/with-db-connection [conn {:datasource pool}]
       (jdbc/execute! conn "create table foo (id integer primary key, content text)")
       (jdbc/insert! conn :foo {:id 1 :content "bar"}))

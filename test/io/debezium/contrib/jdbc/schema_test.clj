@@ -8,11 +8,12 @@
            [io.debezium.contrib.jdbc JDBCDatabaseHistory]))
 
 (def fixture "{\"foo\":\"bar\"}")
+(def database-url "jdbc:sqlite:")
 (def table-name "histories")
 (def instance-id "test")
 
 (defn- create-pool []
-  (let [pool (hikari/make-datasource {:maximum-pool-size 1 :jdbc-url "jdbc:sqlite:"})]
+  (let [pool (hikari/make-datasource {:maximum-pool-size 1 :jdbc-url database-url})]
     (jdbc/with-db-connection [conn {:datasource pool}]
       (jdbc/execute! conn "create table histories (id integer primary key, instance_id text, content text)")
       (jdbc/insert! conn table-name {:id 1 :instance_id instance-id :content fixture})
@@ -56,10 +57,12 @@
 
   (testing "configure"
     (let [instance (JDBCDatabaseHistory.)]
-      (.configure instance (Configuration/from {"database.history.postgres.table" (name table-name)
-                                                "database.history.postgres.instance.id" instance-id})
+      (.configure instance (Configuration/from {"database.history.jdbc.url" database-url
+                                                "database.history.jdbc.table" (name table-name)
+                                                "database.history.jdbc.instance.id" instance-id})
                            nil)
-      (is (= {:table-name table-name :instance-id instance-id} @(.state instance)))))
+      (is (= {:database-url database-url :table-name table-name :instance-id instance-id}
+             @(.state instance)))))
 
   (testing "exists"
     (let [instance (create-instance)]

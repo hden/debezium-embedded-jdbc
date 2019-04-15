@@ -46,15 +46,18 @@
 (defn -configure [this config comparator]
   (.superConfigure this config comparator)
   (let [state (.state this)
-        table-name (.getString config "database.history.postgres.table" "schema")
-        instance-id (.getString config "database.history.postgres.instance.id" "default")]
-    (swap! state merge {:table-name table-name
+        database-url (.getString config "database.history.jdbc.url" "jdbc:sqlite:")
+        table-name (.getString config "database.history.jdbc.table" "schema")
+        instance-id (.getString config "database.history.jdbc.instance.id" "default")]
+    (swap! state merge {:database-url database-url
+                        :table-name table-name
                         :instance-id instance-id})))
 
 (defn -start [this]
   (let [state (.state this)
-        {:keys [instance-id]} @state
-        options {:pool-name (format "PostgresDatabaseHistory (%s)" instance-id)}]
+        {:keys [database-url instance-id]} @state
+        options {:pool-name (format "PostgresDatabaseHistory (%s)" instance-id)
+                 :jdbc-url database-url}]
     (swap! state merge {:connection-pool (core/create-connection-pool options)})))
 
 (defn -stop [this]

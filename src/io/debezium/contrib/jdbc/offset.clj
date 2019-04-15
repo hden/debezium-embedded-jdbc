@@ -54,16 +54,19 @@
   (.superConfigure this config)
   (let [state (.state this)
         config (into {} (.originals config))
-        table-name (get config "offset.storage.postgres.table" "offsets")
-        instance-id (get config "offset.storage.postgres.instance.id" "default")]
-    (swap! state merge {:table-name table-name
+        database-url (get config "offset.storage.jdbc.url" "jdbc:sqlite:")
+        table-name (get config "offset.storage.jdbc.table" "offsets")
+        instance-id (get config "offset.storage.jdbc.instance.id" "default")]
+    (swap! state merge {:database-url database-url
+                        :table-name table-name
                         :instance-id instance-id})))
 
 (defn -start [this]
   (.superStart this)
   (let [state (.state this)
-        {:keys [table-name instance-id]} @state
-        options {:pool-name (format "JDBCOffsetBackingStore (%s)" instance-id)}
+        {:keys [database-url table-name instance-id]} @state
+        options {:pool-name (format "JDBCOffsetBackingStore (%s)" instance-id)
+                 :jdbc-url database-url}
         connection-pool (core/create-connection-pool options)]
     (swap! state assoc :connection-pool connection-pool)
     (initiate-storage! connection-pool table-name instance-id)))
