@@ -55,17 +55,23 @@
   (let [state (.state this)
         config (into {} (.originals config))
         database-url (get config "offset.storage.jdbc.url" "jdbc:sqlite:")
+        username (get config "offset.storage.jdbc.username")
+        password (get config "offset.storage.jdbc.password")
         table-name (get config "offset.storage.jdbc.table" "offsets")
         instance-id (get config "offset.storage.jdbc.instance.id" "default")]
     (swap! state merge {:database-url database-url
+                        :username username
+                        :password password
                         :table-name table-name
                         :instance-id instance-id})))
 
 (defn -start [this]
   (.superStart this)
   (let [state (.state this)
-        {:keys [database-url table-name instance-id]} @state
+        {:keys [database-url username password table-name instance-id]} @state
         options {:pool-name (format "JDBCOffsetBackingStore (%s)" instance-id)
+                 :username username
+                 :password password
                  :jdbc-url database-url}
         connection-pool (core/create-connection-pool options)]
     (swap! state assoc :connection-pool connection-pool)

@@ -58,7 +58,11 @@
   (testing "configure"
     (let [instance (JDBCOffsetBackingStore.)]
       (.configure instance (create-config))
-      (is (= {:database-url database-url :table-name table-name :instance-id instance-id}
+      (is (= {:database-url database-url
+              :username nil
+              :password nil
+              :table-name table-name
+              :instance-id instance-id}
              @(.state instance)))))
 
   (testing "start"

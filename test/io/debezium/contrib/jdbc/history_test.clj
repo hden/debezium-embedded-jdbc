@@ -1,4 +1,4 @@
-(ns io.debezium.contrib.jdbc.schema_test
+(ns io.debezium.contrib.jdbc.history_test
   (:require [clojure.test :refer :all]
             [clojure.java.jdbc :as jdbc]
             [hikari-cp.core :as hikari]
@@ -61,7 +61,11 @@
                                                 "database.history.jdbc.table" (name table-name)
                                                 "database.history.jdbc.instance.id" instance-id})
                            nil)
-      (is (= {:database-url database-url :table-name table-name :instance-id instance-id}
+      (is (= {:database-url database-url
+              :username nil
+              :password nil
+              :table-name table-name
+              :instance-id instance-id}
              @(.state instance)))))
 
   (testing "exists"

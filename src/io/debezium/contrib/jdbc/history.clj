@@ -1,4 +1,4 @@
-(ns io.debezium.contrib.jdbc.schema
+(ns io.debezium.contrib.jdbc.history
   (:require [io.debezium.contrib.jdbc.core :as core])
   (:import [java.nio.charset StandardCharsets]
            [io.debezium.document DocumentReader DocumentWriter]
@@ -47,16 +47,22 @@
   (.superConfigure this config comparator)
   (let [state (.state this)
         database-url (.getString config "database.history.jdbc.url" "jdbc:sqlite:")
+        username (.getString config "database.history.jdbc.username")
+        password (.getString config "database.history.jdbc.password")
         table-name (.getString config "database.history.jdbc.table" "schema")
         instance-id (.getString config "database.history.jdbc.instance.id" "default")]
     (swap! state merge {:database-url database-url
+                        :username username
+                        :password password
                         :table-name table-name
                         :instance-id instance-id})))
 
 (defn -start [this]
   (let [state (.state this)
-        {:keys [database-url instance-id]} @state
+        {:keys [database-url username password instance-id]} @state
         options {:pool-name (format "PostgresDatabaseHistory (%s)" instance-id)
+                 :username username
+                 :password password
                  :jdbc-url database-url}]
     (swap! state merge {:connection-pool (core/create-connection-pool options)})))
 
