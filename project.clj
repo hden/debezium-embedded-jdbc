@@ -13,7 +13,7 @@
   :plugins [[lein-cloverage "1.1.1"]]
   :repl-options {:init-ns io.debezium.contrib.jdbc.core}
   :aot [io.debezium.contrib.jdbc.history
-        io.debezium.contrib.jdbc.schema]
+        io.debezium.contrib.jdbc.offset]
   :profiles
   {:uberjar {:aot :all}
    :dev {:dependencies [[org.xerial/sqlite-jdbc "3.25.2"]
