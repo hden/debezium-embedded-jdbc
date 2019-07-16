@@ -1,4 +1,4 @@
-(defproject hden/debezium-embedded-jdbc "0.1.0-SNAPSHOT"
+(defproject hden/debezium-embedded-jdbc "0.2.0-SNAPSHOT"
   :description "Debezium DatabaseHistory and OffsetBackingStore implementations backed by JDBC."
   :url "https://github.com/hden/debezium-embedded-jdbc"
   :license {:name "Apache-2.0"
