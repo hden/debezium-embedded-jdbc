@@ -5,7 +5,8 @@
             [io.debezium.contrib.jdbc.history :refer :all])
   (:import [java.util.function Consumer]
            [io.debezium.config Configuration]
-           [io.debezium.contrib.jdbc JDBCDatabaseHistory]))
+           [io.debezium.contrib.jdbc JDBCDatabaseHistory]
+           [io.debezium.relational.history DatabaseHistoryListener]))
 
 (def fixture "{\"foo\":\"bar\"}")
 (def database-url "jdbc:sqlite:")
@@ -56,11 +57,11 @@
       (is (= {} @(.state instance)))))
 
   (testing "configure"
-    (let [instance (JDBCDatabaseHistory.)]
-      (.configure instance (Configuration/from {"database.history.jdbc.url" database-url
-                                                "database.history.jdbc.table" (name table-name)
-                                                "database.history.jdbc.instance.id" instance-id})
-                           nil)
+    (let [instance (JDBCDatabaseHistory.)
+          config (Configuration/from {"database.history.jdbc.url" database-url
+                                      "database.history.jdbc.table" (name table-name)
+                                      "database.history.jdbc.instance.id" instance-id})]
+      (.configure instance config nil DatabaseHistoryListener/NOOP)
       (is (= {:database-url database-url
               :username nil
               :password nil
