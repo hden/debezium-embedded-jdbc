@@ -4,7 +4,7 @@
   :license {:name "Apache-2.0"
             :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :dependencies [[org.clojure/clojure "1.10.1"]
-                 [org.clojure/java.jdbc "0.7.10"]
+                 [org.clojure/java.jdbc "0.7.11"]
                  [org.clojure/data.json "0.2.7"]
                  [org.apache.kafka/connect-runtime "2.3.0"]
                  [io.debezium/debezium-core "0.10.0.Final"]
