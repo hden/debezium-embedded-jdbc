@@ -43,8 +43,8 @@
 (defn -init []
   [[] (atom {})])
 
-(defn -configure [this config comparator listener]
-  (.superConfigure this config comparator listener)
+(defn -configure [this config comparator listener use-catalog-before-schema]
+  (.superConfigure this config comparator listener use-catalog-before-schema)
   (let [state (.state this)
         database-url (.getString config "database.history.jdbc.url" "jdbc:sqlite:")
         username (.getString config "database.history.jdbc.username")
