@@ -61,7 +61,7 @@
           config (Configuration/from {"database.history.jdbc.url" database-url
                                       "database.history.jdbc.table" (name table-name)
                                       "database.history.jdbc.instance.id" instance-id})]
-      (.configure instance config nil DatabaseHistoryListener/NOOP)
+      (.configure instance config nil DatabaseHistoryListener/NOOP true)
       (is (= {:database-url database-url
               :username nil
               :password nil
