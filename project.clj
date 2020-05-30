@@ -9,7 +9,7 @@
                  [org.apache.kafka/connect-runtime "2.3.0"]
                  [io.debezium/debezium-core "1.1.1.Final"]
                  [hikari-cp "2.12.0"]
-                 [honeysql "0.9.10"]]
+                 [honeysql "1.0.444"]]
   :plugins [[lein-cloverage "1.1.2"]]
   :repl-options {:init-ns io.debezium.contrib.jdbc.core}
   :aot [io.debezium.contrib.jdbc.history
