@@ -100,4 +100,4 @@
                           :table-name table-name
                           :instance-id instance-id})
       (is (= fixture
-             (map-kv string-from-byte-buffer @(.get instance [(string-to-byte-buffer "foo")] nil)))))))
+             (map-kv string-from-byte-buffer @(.get instance [(string-to-byte-buffer "foo")])))))))

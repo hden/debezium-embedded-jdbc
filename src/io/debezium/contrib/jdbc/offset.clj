@@ -82,11 +82,11 @@
   (let [{:keys [connection-pool]} @(.state this)]
     (core/disconnect connection-pool)))
 
-(defn -get [this keys callback]
+(defn -get [this keys]
   (let [{:keys [connection-pool table-name instance-id]} @(.state this)]
     ;; Restore offset.
     (.setData this (java.util.HashMap. (map-kv string-to-byte-buffer (read-offset connection-pool table-name instance-id))))
-    (.superGet this keys callback)))
+    (.superGet this keys)))
 
 (defn -save [this]
   (let [{:keys [connection-pool table-name instance-id]} @(.state this)
