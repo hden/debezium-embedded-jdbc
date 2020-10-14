@@ -10,7 +10,7 @@
                  [io.debezium/debezium-core "1.3.0.Final"]
                  [hikari-cp "2.13.0"]
                  [honeysql "1.0.444"]]
-  :plugins [[lein-cloverage "1.2.0"]]
+  :plugins [[lein-cloverage "1.2.1"]]
   :repl-options {:init-ns io.debezium.contrib.jdbc.core}
   :aot [io.debezium.contrib.jdbc.history
         io.debezium.contrib.jdbc.offset]
