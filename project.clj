@@ -16,5 +16,5 @@
         io.debezium.contrib.jdbc.offset]
   :profiles
   {:uberjar {:aot :all}
-   :dev {:dependencies [[org.xerial/sqlite-jdbc "3.36.0"]
+   :dev {:dependencies [[org.xerial/sqlite-jdbc "3.36.0.1"]
                         [org.slf4j/slf4j-nop "1.8.0-beta4"]]}})
