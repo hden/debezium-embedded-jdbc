@@ -5,7 +5,7 @@
             :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :dependencies [[org.clojure/clojure "1.10.3"]
                  [org.clojure/java.jdbc "0.7.12"]
-                 [org.clojure/data.json "2.3.1"]
+                 [org.clojure/data.json "2.4.0"]
                  [org.apache.kafka/connect-runtime "2.8.0"]
                  [io.debezium/debezium-core "1.5.3.Final"]
                  [hikari-cp "2.13.0"]
