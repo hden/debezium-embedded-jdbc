@@ -3,7 +3,7 @@
   :url "https://github.com/hden/debezium-embedded-jdbc"
   :license {:name "Apache-2.0"
             :url "http://www.apache.org/licenses/LICENSE-2.0"}
-  :dependencies [[org.clojure/clojure "1.11.1"]
+  :dependencies [[org.clojure/clojure "1.11.2"]
                  [org.clojure/java.jdbc "0.7.12"]
                  [org.clojure/data.json "2.5.0"]
                  [org.apache.kafka/connect-runtime "3.7.0"]
