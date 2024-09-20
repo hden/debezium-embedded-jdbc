@@ -7,7 +7,7 @@
                  [org.clojure/java.jdbc "0.7.12"]
                  [org.clojure/data.json "2.5.0"]
                  [org.apache.kafka/connect-runtime "3.8.0"]
-                 [io.debezium/debezium-core "1.9.8.Final"]
+                 [io.debezium/debezium-core "2.7.3.Final"]
                  [hikari-cp "3.1.0"]
                  [honeysql "1.0.461"]]
   :plugins [[lein-cloverage "1.2.4"]]
