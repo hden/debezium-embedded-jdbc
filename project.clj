@@ -6,7 +6,7 @@
   :dependencies [[org.clojure/clojure "1.12.4"]
                  [org.clojure/java.jdbc "0.7.12"]
                  [org.clojure/data.json "2.5.2"]
-                 [org.apache.kafka/connect-runtime "4.0.0"]
+                 [org.apache.kafka/connect-runtime "4.1.1"]
                  [io.debezium/debezium-core "1.9.8.Final"]
                  [hikari-cp "4.0.0"]
                  [honeysql "1.0.461"]]
