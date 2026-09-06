@@ -17,4 +17,4 @@
   :profiles
   {:uberjar {:aot :all}
    :dev {:dependencies [[org.xerial/sqlite-jdbc "3.53.4.0"]
-                        [org.slf4j/slf4j-nop "2.0.18"]]}})
+                        [org.slf4j/slf4j-nop "2.0.19"]]}})
